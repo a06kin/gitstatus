@@ -23,7 +23,7 @@
 namespace gitstatus {
 
 const char* GitError() {
-  const git_error* err = git_error_last();
+  const git_error* err = giterr_last();
   return err && err->message ? err->message : "unknown error";
 }
 
@@ -139,7 +139,7 @@ git_reference* Upstream(git_reference* local) {
     case GIT_ENOTFOUND:
       return nullptr;
     default:
-      VERIFY(git_error_last()->klass == GIT_ERROR_INVALID) << "git_branch_upstream: " << GitError();
+      VERIFY(giterr_last()->klass == GITERR_INVALID) << "git_branch_upstream: " << GitError();
       return nullptr;
   }
 }

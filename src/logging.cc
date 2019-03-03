@@ -66,7 +66,7 @@ std::ostream& operator<<(std::ostream& strm, Errno e) {
   // GNU C Library uses a buffer of 1024 characters for strerror(). Mimic to avoid truncations.
   char buf[1024];
   // This temp variable ensures that we are calling the GNU-specific strerror_r().
-  const char* desc = strerror_r(e.err, buf, sizeof(buf));
+  const int desc = strerror_r(e.err, buf, sizeof(buf));
   return strm << desc;
 }
 
